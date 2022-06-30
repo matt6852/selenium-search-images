@@ -12,6 +12,17 @@ const parseYandexImages = async (img) => {
     await driver.get(
       `https://yandex.ru/images/search?lr=213&rpt=imageview&url=${miniO}${img}`
     );
+    const stop = await driver
+      .findElement(
+        By.className("CbirSection CbirSection_decorated CbirOtherSizes")
+      )
+      .getAttribute("innerText");
+
+    if (stop.split(" ").find((el) => el === "найдено")) {
+      await driver.quit();
+      return [];
+    }
+
     const btn = await driver
       .findElement(By.className("CbirSites-Items"))
       .getAttribute("innerHTML");
@@ -19,17 +30,17 @@ const parseYandexImages = async (img) => {
     const links = root
       .querySelectorAll("a")
       .map((tag) => {
-        const btn = {
+        const parseObj = {
           resultName: tag.lastChild.innerText,
           link: tag.attributes.href,
           type: "YandexSearch",
         };
-        return btn;
+        return parseObj;
       })
       .filter((a, i, arr) => a.resultName && a.link !== arr[i + 1]?.link);
 
     await driver.quit();
-    return links;
+    return links.slice(0, 10);
   } catch (e) {
     console.log(e);
     await driver.quit();
@@ -51,29 +62,40 @@ const parseGoogleImages = async (img) => {
     const test = await driver
       .findElement({ name: "image_url" })
       .sendKeys(`${miniO}${img}`, Key.RETURN);
-    const result = await driver
-      .findElement({ id: "search" })
+    const stop = await driver
+      .findElement(By.className("O1id0e"))
       .getAttribute("innerHTML");
-    const root = parse(result);
+    if (stop === "Таких же изображений не найдено") {
+      await driver.quit();
+      return [];
+    }
+
+    const result = await driver.findElements({ className: "ULSxyf" });
+    const last = result.pop();
+
+    const render = await last.getAttribute("innerHTML");
+    // console.log(result, "result");
+    const root = parse(render);
     const links = root
       .querySelectorAll("a")
       .map((tag) => {
-        const btn = {
+        const parseObj = {
           resultName: tag.innerText,
           link: tag.attributes.href,
           type: "GoogleSearch",
         };
-        return btn;
+        return parseObj;
       })
       .filter(
         (a, i, arr) =>
           a.resultName &&
           a.link !== arr[i + 1]?.link &&
-          a.resultName !== "Сохраненная&nbsp;копия"
+          a.resultName !== "Сохраненная&nbsp;копия" &&
+          a.resultName !== "Похожие изображения"
       );
     await driver.quit();
     // console.log(links, "links");
-    return links;
+    return links.slice(0, 10);
   } catch (e) {
     console.log(e);
     await driver.quit();

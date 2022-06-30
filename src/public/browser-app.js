@@ -13,6 +13,7 @@ let serverError = "";
 upload.addEventListener("click", async (e) => {
   try {
     e.preventDefault();
+    //
     upload.disabled = true;
     const formData = new FormData();
 
@@ -100,4 +101,5 @@ clear.addEventListener("click", async (e) => {
   listDom.innerHTML = "";
   websites = [];
   imagefile.value = "";
+  console.log("test");
 });
