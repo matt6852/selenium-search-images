@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon -->
+    <!-- <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" /> -->
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- normalize css -->
+    <link rel="stylesheet" href="./normalize.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="./main.css" />
+    <title>Get image's result</title>
+  </head>
+  <body>
+    <form class="task-form">
+      <h4>Upload image</h4>
+      <div class="form-control">
+        <input
+          id="file"
+          type="file"
+          name="image"
+          class="upload-input"
+          placeholder="image"
+        />
+        <!-- <input
+          type="text"
+          name="comment"
+          class="comment-input"
+          placeholder="image"
+        /> -->
+        <div style="display: flex; justify-content: space-between; width: 100%">
+          <button id="upload">Upload</button>
+          <button id="clear">clear reuslts</button>
+        </div>
+      </div>
+      <div class="form-alert"></div>
+    </form>
+    <section class="tasks-container">
+      <p class="loading-text">Loading...</p>
+      <div class="list"></div>
+    </section>
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./browser-app.js"></script>
+  </body>
+</html>
