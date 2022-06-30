@@ -53,10 +53,14 @@ upload.addEventListener("click", async (e) => {
     clear.disabled = false;
     const render = websites
       .map((w) => {
-        const { link, resultName } = w;
+        const { link, resultName, type } = w;
 
         return `<div class="single-task">
-              <h5><span><i class="far fa-check-circle"></i></span>${resultName}</h5>
+              <p class="type">${type}</p>
+              <p><span><i class="far fa-check-circle"></i></span>${resultName.slice(
+                0,
+                20
+              )}</p>
               <div class="task-links">
               <a href="${link}" target="_blank"  class="edit-link">
                Посмотреть сайт

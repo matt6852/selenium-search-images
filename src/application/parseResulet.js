@@ -22,6 +22,7 @@ const parseYandexImages = async (img) => {
         const btn = {
           resultName: tag.lastChild.innerText,
           link: tag.attributes.href,
+          type: "YandexSearch",
         };
         return btn;
       })
@@ -60,6 +61,7 @@ const parseGoogleImages = async (img) => {
         const btn = {
           resultName: tag.innerText,
           link: tag.attributes.href,
+          type: "GoogleSearch",
         };
         return btn;
       })

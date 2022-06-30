@@ -393,9 +393,10 @@ form > :last-child {
   font-size: 0.75rem;
   border: transparent;
   cursor: pointer;
-}
-.edit-link {
   color: var(--green-dark);
+}
+.type {
+  color: var(--red-dark);
 }
 .delete-btn {
   color: var(--red-dark);
