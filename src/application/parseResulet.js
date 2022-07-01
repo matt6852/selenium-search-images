@@ -65,10 +65,11 @@ const parseGoogleImages = async (img) => {
     const stop = await driver
       .findElement(By.className("O1id0e"))
       .getAttribute("innerHTML");
-    if (stop === "Таких же изображений не найдено") {
+    if (stop === "Изображения других размеров не найдены") {
       await driver.quit();
       return [];
     }
+    // console.log(stop);
 
     const result = await driver.findElements({ className: "ULSxyf" });
     const last = result.pop();

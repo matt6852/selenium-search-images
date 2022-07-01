@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const parseYandexImages = require("./application/parseResulet");
+// const parseYandexImages = require("./application/parseResulet");
 const imageRouter = require("./routes/uplaod-image-route");
 const bodyParser = require("body-parser");
 
